@@ -1,0 +1,45 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        if ( s.length()==0)
+            return 0;
+        map <char,int> mp1;
+        map <int,char> mp2;
+
+        map <char,int>:: iterator iter1;
+        map <int,char>:: iterator iter2;
+
+        int ans = 0;
+        int len = 0;
+        int startmp1 = 0;
+        int endmp1 = 0;
+
+        int i,j;
+        for(i=0; i<s.length(); i++) {
+            iter1=mp1.find(s[i]);
+            if ( iter1 != mp1.end()){
+                len=mp1.size();
+                if (len>ans)
+                    ans=len;
+
+                endmp1=iter1->second;
+
+                for(j=startmp1; j<=endmp1; j++){
+                    iter2=mp2.find(j);
+                    iter1=mp1.find(iter2->second);
+                    mp2.erase(iter2);
+                    mp1.erase(iter1);
+                }
+                startmp1=endmp1+1;
+            }
+
+            mp1[s[i]]=i;
+            mp2[i]=s[i];
+        }
+
+        len=mp1.size();
+        if (len>ans)
+            ans=len;
+        return ans;
+    }
+};
