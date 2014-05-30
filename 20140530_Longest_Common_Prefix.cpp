@@ -1,7 +1,7 @@
 class Solution {
 public:
   string longestCommonPrefix(vector<string> &strs){
-    vector<string>:: iterator = strs.begin();
+    vector<string>:: iterator iter = strs.begin();
     if (iter==strs.end())
       return "";
     string ret = *iter;
