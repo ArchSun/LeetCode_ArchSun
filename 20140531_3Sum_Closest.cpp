@@ -1,21 +1,13 @@
 class Solution {
 public:
     int threeSumClosest(vector<int> &num, int target) {
-        int ret = INT_MAX;
-        int ltgt = INT_MIN;
-        int rtgt = INT_MAX;
-        double t2r = 0;
-        double l2t = 0;
-        bool rflag = false;
-        bool lflag = false;
-
         vector<int>::iterator iter;
         vector<int>::iterator lter;
         vector<int>::iterator rter;
-
         sort(num.begin(), num.end());
+        int minGap = num[0]+num[1]+num[2]-target;
+        int tmp = 0;
         for( iter=num.begin(); iter!=num.end()-2; iter++ ){
-            //cout<<"iter "<<*iter<<endl;
             if( iter>num.begin() && *iter==*(iter-1))
                 continue;
             lter = iter + 1;
@@ -29,32 +21,19 @@ public:
                     rter--;
                     continue;
                 }
-                ret = *iter+*lter+*rter;
-                // cout<<"iter "<<*iter<<" lter "<<*lter<<"    rter "<<*rter<<"    ret "<<ret<<endl;
-                if( ret==target )
-                    return ret;
-                else if( ret>target ){
-                    rflag = true;
-                    rtgt = min(rtgt,ret);
+                tmp = *iter+*lter+*rter-target;
+                if( tmp==0 )
+                    return target;
+                else if( tmp>0 ){
+                    minGap = abs(minGap)<tmp? minGap: tmp;
                     rter--;
-                   // cout<<"rtgt "<<rtgt<<endl;
                 }
                 else {
-                    lflag = true;
-                    ltgt = max(ltgt,ret);
+                    minGap = abs(minGap)<0-tmp? minGap: tmp;
                     lter++;
-                   // cout<<"ltgt "<<ltgt<<endl;
                 }
             }
         }
-        if (!rflag)
-            return ltgt;
-        if (!lflag)
-            return rtgt;
-        t2r = fabs(rtgt-target);
-        l2t = fabs(target-ltgt);
-        //cout<<t2r<<"    "<<l2t<<endl;
-        ret = t2r>l2t? ltgt: rtgt;
-        return ret;
+        return minGap+target;
     }
 };
