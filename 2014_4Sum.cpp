@@ -13,7 +13,7 @@ public:
             if ( i>0 && num[i]==num[i-1])
                 continue;
             for( j=i+1; j<num.size()-2; j++){
-                if( j>0 && num[j]==num[j-1])
+                if( j>i+1 && num[j]==num[j-1])
                     continue;
                 l = j+1;
                 r = num.size()-1;
