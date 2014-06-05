@@ -2,30 +2,30 @@ class Solution {
 public:
     vector<int> findSubstring(string S, vector<string> &L) {
         // Note: The Solution object is instantiated only once.
-		map<string,int> words;
-		map<string,int> cur;
-		int wordNum = L.size();
-		for(int i = 0; i < wordNum; i++)
-			words[L[i]]++;
-		int wordLen = L[0].size();
-		vector<int> res;
-		//if(S.size() < wordLen*wordNum)return res;
-		for(int i = 0; i <= (int)S.size()-wordLen*wordNum; i++)
-		{
-			cur.clear();
-			int j;
-			for(j = 0; j < wordNum; j++)
-			{
-				string word = S.substr(i+j*wordLen, wordLen);
-				if(words.find(word) == words.end())
-					break;
-				cur[word]++;
-				if(cur[word]>words[word])
-					break;
-			}
-			if(j == wordNum)
-				res.push_back(i);
+		map<string, int> wordSet;
+		map<string, int> cmpSet;
+		vector<int> ret;
+		int i = 0;
+		int vecLSize = L.size();
+		int wordSize = L[0].size();
+		for( i=0; i<vecLSize; i++)
+		    wordSet[L[i]]++;
+		int j = 0;
+		string word;
+		// warning type of S.size() !!!!
+		for( i=0; i<=(int)S.size()-vecLSize*wordSize; i++) {
+		    cmpSet.clear();
+		    for( j=0; j<vecLSize; j++) {
+		        word = S.substr( i+j*wordSize, wordSize);
+		        if( wordSet.find(word) == wordSet.end())
+		            break;
+		        cmpSet[word]++;
+		        if( wordSet[word]<cmpSet[word])
+		            break;
+		    }
+		    if( j==vecLSize)
+		        ret.push_back(i);
 		}
-		return res;
+		return ret;
     }
 };
