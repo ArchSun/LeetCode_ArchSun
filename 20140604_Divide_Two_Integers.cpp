@@ -2,8 +2,8 @@ class Solution {
 public:
     int divide(int dividend, int divisor) {
         // Note: The Solution object is instantiated only once.
-        unsigned a = dividend;
-        unsigned b = divisor;
+        unsigned a = abs(dividend);
+        unsigned b = abs(divisor);
         unsigned ret = 0;
         long long c = b;
         int i = 0;
