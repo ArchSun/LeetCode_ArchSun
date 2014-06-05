@@ -1,5 +1,7 @@
 class Solution {
 // reverse swap can be useed
+// 5--3 1 2
+// 5 = (3-1)*2! + (1-1)*1! + (2-1)*0!
 public:
     void nextPermutation(vector<int> &num) {
        int i = 0;
