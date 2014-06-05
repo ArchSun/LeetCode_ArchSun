@@ -1,4 +1,5 @@
 class Solution {
+// reverse swapcan be useed
 public:
     void nextPermutation(vector<int> &num) {
        int i = 0;
@@ -29,3 +30,4 @@ public:
        }
     }
 };
+
